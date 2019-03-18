@@ -4,6 +4,12 @@ from setuptools import find_packages, setup
 setup(
     name='ket',
     version='0.0.1',
+    description='Bitbucket workflows in your terminal',
+    long_description=open('README.md').read(),
+    author='Andrii Yurchuk',
+    author_email='ay@mntw.re',
+    license='MIT',
+    url='https://github.com/Ch00k/ket',
     install_requires=[
         'click==7.0',
         'gitpython==2.1.11',
