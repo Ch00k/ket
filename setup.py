@@ -3,9 +3,10 @@ from setuptools import find_packages, setup
 
 setup(
     name='ket',
-    version='0.0.1',
+    version='0.0.2',
     description='Bitbucket workflows in your terminal',
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     author='Andrii Yurchuk',
     author_email='ay@mntw.re',
     license='MIT',
