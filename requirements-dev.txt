@@ -2,6 +2,6 @@
 -e .
 
 flake8
-ipython
 pdbpp
 pip-tools
+pytest
