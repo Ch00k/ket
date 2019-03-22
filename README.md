@@ -1,3 +1,6 @@
+[![Build
+Status](https://travis-ci.org/Ch00k/ket.svg?branch=master)](https://travis-ci.org/Ch00k/ket)
+
 # ket
 
 ket is a command-line tool, that makes interaction with
