@@ -172,8 +172,7 @@ class Repo:
         if message_cmd_option:
             data = message_cmd_option
         else:
-            config = self.git_repo.config_reader()
-            editor = config.get('core', 'editor')
+            editor = git.Git().var('GIT_EDITOR')
             data = utils.edit_pull_request_message(editor)
         title, description = utils.parse_pull_request_message(data)
         if not title:
