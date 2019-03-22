@@ -19,4 +19,16 @@ setup(
     packages=find_packages(),
     entry_points='''
         [console_scripts]
-        ket=ket.cli:ket''')
+        ket=ket.cli:ket''',
+    classifiers=[
+        'Environment :: Console',
+        'Intended Audience :: Developers',
+        'Intended Audience :: Information Technology',
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: Unix',
+        'Programming Language :: Python',
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Topic :: Software Development',
+        'Topic :: Software Development :: Version Control',
+        'Topic :: Software Development :: Version Control :: Git'])
