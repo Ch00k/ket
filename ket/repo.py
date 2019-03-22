@@ -76,7 +76,7 @@ class Repo:
             raise RuntimeError("Source and target branches must be different")
         try:
             self._verify_remote_branch_exists(source_branch)
-        except bitbucket.BitbucketError as e:
+        except RepoError as e:
             raise RepoError(f"{e}. Did you forget to push?")
         title, description = self._generate_pull_request_message(message)
         try:
