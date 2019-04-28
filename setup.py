@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 
 setup(
     name='ket',
-    version='0.0.3',
+    version='0.0.4',
     description='Bitbucket workflows in your terminal',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -13,6 +13,7 @@ setup(
     url='https://github.com/Ch00k/ket',
     install_requires=[
         'click==7.0',
+        'furl==2.0.0',
         'gitpython==2.1.11',
         'requests==2.21.0',
         'tabulate==0.8.3'],

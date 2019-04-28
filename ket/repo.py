@@ -1,5 +1,6 @@
 import functools
 
+import furl
 import git
 import requests
 
@@ -16,20 +17,19 @@ class Repo:
             self.bitbucket_client = bitbucket.Client(
                 username=bitbucket_username,
                 api_key=bitbucket_api_key,
-                repo_slug=self.slug)
+                repo_path=self.path)
         except bitbucket.BitbucketAuthError as e:
             raise RepoError(e)
 
     @property
     @functools.lru_cache()
-    def slug(self):
+    def path(self):
         remote_url = self.git_repo.remote().url
-        parts = remote_url.rsplit('/', 1)
-        if len(parts) != 2:
-            raise RuntimeError("Unable to extract repo slug from remote URI")
-        repo_slug = parts[1]
-        repo_slug = repo_slug.rsplit('.', 1)[0]  # cut off `.git` part
-        return repo_slug
+        url = furl.furl(remote_url)
+        path = str(url.path).split('.')[0]
+        if path.startswith('/'):
+            path = path[1:]
+        return path
 
     def list_pull_requests(self, state=('open',)):
         # `all` is a hack. Invalid `state` query param makes Bitbucket respond
@@ -73,7 +73,7 @@ class Repo:
         self._verify_remote_repo_exists()
         source_branch = self.git_repo.active_branch.name
         if source_branch == target_branch:
-            raise RuntimeError("Source and target branches must be different")
+            raise RepoError("Source and target branches must be different")
         try:
             self._verify_remote_branch_exists(source_branch)
         except RepoError as e:
@@ -154,9 +154,7 @@ class Repo:
         except requests.HTTPError as e:
             msg = e
             if e.response.status_code == 404:
-                msg = (
-                    f"Bitbucket repository "
-                    f"{self.bitbucket_client.username}/{self.slug} not found")
+                msg = f"Bitbucket repository {self.path} not found"
             raise RepoError(msg)
 
     def _verify_remote_branch_exists(self, branch_name):

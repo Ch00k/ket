@@ -2,11 +2,11 @@ import requests
 
 
 class Client:
-    def __init__(self, username, api_key, repo_slug):
+    def __init__(self, username, api_key, repo_path):
         if None in (username, api_key):
             raise BitbucketAuthError("Bitbucket authentication not configured")
         base_url = 'https://api.bitbucket.org/2.0'
-        self.repo_url = f'{base_url}/repositories/{username}/{repo_slug}'
+        self.repo_url = f'{base_url}/repositories/{repo_path}'
         self.session = requests.Session()
         self.session.auth = (username, api_key)
 
